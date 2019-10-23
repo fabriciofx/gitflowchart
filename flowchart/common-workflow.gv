@@ -19,8 +19,8 @@ digraph commonworkflow {
     // actions
     add_or_change[shape = parallelogram, label = "add or change files"]
 
-    // gits
-    git_add [label = "git add ."]
+    // commands
+    git_add [label = "add changes to the staging area\n\ngit add ."]
     git_status [label = "git status"]
     git_reset [label = "git reset HEAD {file}"]
     git_commit [label = "git commit -m \"message\""]
