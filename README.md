@@ -1,10 +1,10 @@
 ## Git Flowchart
 
-Several `git` workflow flowchart to improve the understand `git` command
-dynamics.
+Several `git` flowchart workflows to improve the understanding of `git` commands
+and dynamics.
 
-### First workflow
-![](image/first-workflow.svg)
+### Initialization workflow
+![](image/init-workflow.svg)
 
 ### Common workflow
 ![](image/common-workflow.svg)

@@ -1,4 +1,4 @@
-digraph test {
+digraph initworkflow {
     edge [
         arrowsize = 0.8,
         fontname = "Verdana",
