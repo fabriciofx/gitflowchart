@@ -2,37 +2,72 @@ digraph commonworkflow {
     edge [
         arrowsize = 0.8,
         fontname = "Verdana",
-        fontsize = 10
-    ];
+        fontsize = 12
+    ]
 
     node [
         shape = rect,
         style = filled,
         fillcolor = lightyellow,
         fontname = "Verdana",
-        fontsize = 10
-    ];
+        fontsize = 12
+    ]
 
     // decisions
-    fine_to_commit [shape = diamond, label = "fine to\ncommit?"]
+    fine_to_commit [
+        shape = diamond,
+        label = <<b>Fine to<br/>commit?</b>>
+    ];
 
     // actions
-    add_or_change[shape = parallelogram, label = "add or change files"]
+    add_or_change[
+        label = <
+            <b>Add or change files</b>
+        >
+    ]
 
     // commands
-    git_add [label = "add changes to the staging area\n\ngit add ."]
-    git_status [label = "git status"]
-    git_reset [label = "git reset HEAD {file}"]
-    git_commit [label = "git commit -m \"message\""]
+    git_add [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Put the changes into staging area</b></td></tr>
+            <tr><td>git add .</td></tr>
+            </table>
+        >
+    ]
+    git_status [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Check the content to commit</b></td></tr>
+            <tr><td>git status</td></tr>
+            </table>
+        >
+    ]
+    git_restore [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Restore from staging area</b></td></tr>
+            <tr><td>git restore --staged {filename}</td></tr>
+            </table>
+        >
+    ]
+    git_commit [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create the commit</b></td></tr>
+            <tr><td>git commit -m "message"</td></tr>
+            </table>
+        >
+    ]
 
     // relations
     add_or_change -> git_add
     git_add -> git_status
     git_status -> fine_to_commit
     fine_to_commit -> git_commit [label = "yes"]
-    fine_to_commit:w -> git_reset [label = "no", constraint = false]
-    git_reset -> git_status
+    fine_to_commit:w -> git_restore [label = "no", constraint = false]
+    git_restore -> git_status
 
-    // put git_reset and git_status in the same row
-    { rank = same; git_reset; git_status; }
+    // put git_restore and git_status in the same row
+    { rank = same; git_restore; git_status; }
 }
