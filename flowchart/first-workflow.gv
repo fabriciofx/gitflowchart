@@ -1,0 +1,35 @@
+digraph test {
+    edge [
+        arrowsize = 0.8,
+        fontname = "Verdana",
+        fontsize = 10
+    ];
+
+    node [
+        shape = rect,
+        style = filled,
+        fillcolor = lightyellow,
+        fontname = "Verdana",
+        fontsize = 10
+    ];
+
+    // questions
+    question_local_repository [shape = diamond, label = "local\nrespository?"]
+
+    // actions
+    action_add_or_change[shape = parallelogram, label = "add or change files"]
+
+    // commands
+    command_init [label = "git init"]
+    command_add [label = "git add ."]
+    command_commit [label = "git commit -m \"message\""]
+    command_clone [label = "git clone URL"]
+
+    // relations
+    question_local_repository -> command_init[label = " yes"]
+    question_local_repository -> command_clone[label = "no", constraint = false]
+    command_init -> action_add_or_change
+    action_add_or_change -> command_add
+    command_add -> command_commit
+    command_clone -> action_add_or_change:e[constraint = false]
+}
