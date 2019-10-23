@@ -9,66 +9,66 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 366)">
 <title>test</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-366 293.303,-366 293.303,4 -4,4"/>
-<!-- question_local_repository -->
-<g id="node1" class="node"><title>question_local_repository</title>
+<!-- local_repository -->
+<g id="node1" class="node"><title>local_repository</title>
 <polygon fill="lightyellow" stroke="black" points="95.8032,-362 18.8032,-332 95.8032,-302 172.803,-332 95.8032,-362"/>
 <text text-anchor="middle" x="95.8032" y="-335" font-family="Verdana" font-size="10.00">local</text>
 <text text-anchor="middle" x="95.8032" y="-324" font-family="Verdana" font-size="10.00">respository?</text>
 </g>
-<!-- command_init -->
-<g id="node3" class="node"><title>command_init</title>
+<!-- git_init -->
+<g id="node3" class="node"><title>git_init</title>
 <polygon fill="lightyellow" stroke="black" points="122.803,-255 68.8032,-255 68.8032,-219 122.803,-219 122.803,-255"/>
 <text text-anchor="middle" x="95.8032" y="-234.5" font-family="Verdana" font-size="10.00">git init</text>
 </g>
-<!-- question_local_repository&#45;&gt;command_init -->
-<g id="edge1" class="edge"><title>question_local_repository&#45;&gt;command_init</title>
+<!-- local_repository&#45;&gt;git_init -->
+<g id="edge1" class="edge"><title>local_repository&#45;&gt;git_init</title>
 <path fill="none" stroke="black" d="M95.8032,-301.829C95.8032,-289.484 95.8032,-275.237 95.8032,-263.34"/>
 <polygon fill="black" stroke="black" points="98.6033,-263.152 95.8032,-255.152 93.0033,-263.152 98.6033,-263.152"/>
 <text text-anchor="middle" x="106.803" y="-276" font-family="Verdana" font-size="10.00"> yes</text>
 </g>
-<!-- command_clone -->
-<g id="node6" class="node"><title>command_clone</title>
+<!-- git_clone -->
+<g id="node6" class="node"><title>git_clone</title>
 <polygon fill="lightyellow" stroke="black" points="289.303,-350 208.303,-350 208.303,-314 289.303,-314 289.303,-350"/>
 <text text-anchor="middle" x="248.803" y="-329.5" font-family="Verdana" font-size="10.00">git clone URL</text>
 </g>
-<!-- question_local_repository&#45;&gt;command_clone -->
-<g id="edge2" class="edge"><title>question_local_repository&#45;&gt;command_clone</title>
+<!-- local_repository&#45;&gt;git_clone -->
+<g id="edge2" class="edge"><title>local_repository&#45;&gt;git_clone</title>
 <path fill="none" stroke="black" d="M173.2,-332C182.299,-332 191.381,-332 199.932,-332"/>
 <polygon fill="black" stroke="black" points="199.95,-334.8 207.95,-332 199.95,-329.2 199.95,-334.8"/>
 <text text-anchor="middle" x="190.553" y="-338" font-family="Verdana" font-size="10.00">no</text>
 </g>
-<!-- action_add_or_change -->
-<g id="node2" class="node"><title>action_add_or_change</title>
+<!-- add_or_change -->
+<g id="node2" class="node"><title>add_or_change</title>
 <polygon fill="lightyellow" stroke="black" points="191.41,-182 39.321,-182 0.19639,-146 152.285,-146 191.41,-182"/>
 <text text-anchor="middle" x="95.8032" y="-161.5" font-family="Verdana" font-size="10.00">add or change files</text>
 </g>
-<!-- command_add -->
-<g id="node4" class="node"><title>command_add</title>
+<!-- git_add -->
+<g id="node4" class="node"><title>git_add</title>
 <polygon fill="lightyellow" stroke="black" points="125.303,-109 66.3032,-109 66.3032,-73 125.303,-73 125.303,-109"/>
 <text text-anchor="middle" x="95.8032" y="-88.5" font-family="Verdana" font-size="10.00">git add .</text>
 </g>
-<!-- action_add_or_change&#45;&gt;command_add -->
-<g id="edge4" class="edge"><title>action_add_or_change&#45;&gt;command_add</title>
+<!-- add_or_change&#45;&gt;git_add -->
+<g id="edge4" class="edge"><title>add_or_change&#45;&gt;git_add</title>
 <path fill="none" stroke="black" d="M95.8032,-145.813C95.8032,-137.179 95.8032,-126.555 95.8032,-117.034"/>
 <polygon fill="black" stroke="black" points="98.6033,-117.029 95.8032,-109.029 93.0033,-117.029 98.6033,-117.029"/>
 </g>
-<!-- command_init&#45;&gt;action_add_or_change -->
-<g id="edge3" class="edge"><title>command_init&#45;&gt;action_add_or_change</title>
+<!-- git_init&#45;&gt;add_or_change -->
+<g id="edge3" class="edge"><title>git_init&#45;&gt;add_or_change</title>
 <path fill="none" stroke="black" d="M95.8032,-218.813C95.8032,-210.179 95.8032,-199.555 95.8032,-190.034"/>
 <polygon fill="black" stroke="black" points="98.6033,-190.029 95.8032,-182.029 93.0033,-190.029 98.6033,-190.029"/>
 </g>
-<!-- command_commit -->
-<g id="node5" class="node"><title>command_commit</title>
+<!-- git_commit -->
+<g id="node5" class="node"><title>git_commit</title>
 <polygon fill="lightyellow" stroke="black" points="165.803,-36 25.8032,-36 25.8032,-0 165.803,-0 165.803,-36"/>
 <text text-anchor="middle" x="95.8032" y="-15.5" font-family="Verdana" font-size="10.00">git commit &#45;m &quot;message&quot;</text>
 </g>
-<!-- command_add&#45;&gt;command_commit -->
-<g id="edge5" class="edge"><title>command_add&#45;&gt;command_commit</title>
+<!-- git_add&#45;&gt;git_commit -->
+<g id="edge5" class="edge"><title>git_add&#45;&gt;git_commit</title>
 <path fill="none" stroke="black" d="M95.8032,-72.8129C95.8032,-64.179 95.8032,-53.5551 95.8032,-44.0341"/>
 <polygon fill="black" stroke="black" points="98.6033,-44.0288 95.8032,-36.0288 93.0033,-44.0289 98.6033,-44.0288"/>
 </g>
-<!-- command_clone&#45;&gt;action_add_or_change -->
-<g id="edge6" class="edge"><title>command_clone&#45;&gt;action_add_or_change:e</title>
+<!-- git_clone&#45;&gt;add_or_change -->
+<g id="edge6" class="edge"><title>git_clone&#45;&gt;add_or_change:e</title>
 <path fill="none" stroke="black" d="M248.731,-313.757C247.607,-272.922 238.901,-173.084 180.915,-164.58"/>
 <polygon fill="black" stroke="black" points="180.982,-161.777 172.803,-164 180.583,-167.363 180.982,-161.777"/>
 </g>

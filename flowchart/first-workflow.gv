@@ -14,22 +14,22 @@ digraph test {
     ];
 
     // decisions
-    decision_local_repository [shape = diamond, label = "local\nrespository?"]
+    local_repository [shape = diamond, label = "local\nrespository?"]
 
     // actions
-    action_add_or_change[shape = parallelogram, label = "add or change files"]
+    add_or_change[shape = parallelogram, label = "add or change files"]
 
     // commands
-    command_init [label = "git init"]
-    command_add [label = "git add ."]
-    command_commit [label = "git commit -m \"message\""]
-    command_clone [label = "git clone URL"]
+    git_init [label = "git init"]
+    git_add [label = "git add ."]
+    git_commit [label = "git commit -m \"message\""]
+    git_clone [label = "git clone URL"]
 
     // relations
-    decision_local_repository -> command_init[label = " yes"]
-    decision_local_repository -> command_clone[label = "no", constraint = false]
-    command_init -> action_add_or_change
-    action_add_or_change -> command_add
-    command_add -> command_commit
-    command_clone -> action_add_or_change:e[constraint = false]
+    local_repository -> git_init[label = " yes"]
+    local_repository -> git_clone[label = "no", constraint = false]
+    git_init -> add_or_change
+    add_or_change -> git_add
+    git_add -> git_commit
+    git_clone -> add_or_change:e[constraint = false]
 }
