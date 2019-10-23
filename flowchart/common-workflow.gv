@@ -1,0 +1,38 @@
+digraph commonworkflow {
+    edge [
+        arrowsize = 0.8,
+        fontname = "Verdana",
+        fontsize = 10
+    ];
+
+    node [
+        shape = rect,
+        style = filled,
+        fillcolor = lightyellow,
+        fontname = "Verdana",
+        fontsize = 10
+    ];
+
+    // decisions
+    fine_to_commit [shape = diamond, label = "fine to\ncommit?"]
+
+    // actions
+    add_or_change[shape = parallelogram, label = "add or change files"]
+
+    // gits
+    git_add [label = "git add ."]
+    git_status [label = "git status"]
+    git_reset [label = "git reset HEAD {file}"]
+    git_commit [label = "git commit -m \"message\""]
+
+    // relations
+    add_or_change -> git_add
+    git_add -> git_status
+    git_status -> fine_to_commit
+    fine_to_commit -> git_commit [label = "yes"]
+    fine_to_commit:w -> git_reset [label = "no", constraint = false]
+    git_reset -> git_status
+
+    // put git_reset and git_status in the same row
+    { rank = same; git_reset; git_status; }
+}

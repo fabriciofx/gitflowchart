@@ -5,3 +5,6 @@ dynamics.
 
 ### First workflow
 ![](image/first-workflow.svg)
+
+### Common workflow
+![](image/common-workflow.svg)
