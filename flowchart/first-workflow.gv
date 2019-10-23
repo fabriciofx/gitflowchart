@@ -13,8 +13,8 @@ digraph test {
         fontsize = 10
     ];
 
-    // questions
-    question_local_repository [shape = diamond, label = "local\nrespository?"]
+    // decisions
+    decision_local_repository [shape = diamond, label = "local\nrespository?"]
 
     // actions
     action_add_or_change[shape = parallelogram, label = "add or change files"]
@@ -26,8 +26,8 @@ digraph test {
     command_clone [label = "git clone URL"]
 
     // relations
-    question_local_repository -> command_init[label = " yes"]
-    question_local_repository -> command_clone[label = "no", constraint = false]
+    decision_local_repository -> command_init[label = " yes"]
+    decision_local_repository -> command_clone[label = "no", constraint = false]
     command_init -> action_add_or_change
     action_add_or_change -> command_add
     command_add -> command_commit
