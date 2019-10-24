@@ -1,35 +1,79 @@
 digraph initworkflow {
+    splines = line;
+
     edge [
         arrowsize = 0.8,
         fontname = "Verdana",
-        fontsize = 10
-    ];
+        fontsize = 12
+    ]
 
     node [
         shape = rect,
         style = filled,
         fillcolor = lightyellow,
         fontname = "Verdana",
-        fontsize = 10
-    ];
+        fontsize = 12
+    ]
+
+    track_files [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Track the project files</b></td></tr>
+            </table>
+        >
+    ]
 
     // decisions
-    local_repository [shape = diamond, label = "local\nrespository?"]
-
-    // actions
-    add_or_change[shape = parallelogram, label = "add or change files"]
+    local_repository [
+        shape = diamond,
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>is there a local</b></td></tr>
+            <tr><td><b>repository?</b></td></tr>
+            </table>
+        >
+    ]
 
     // commands
-    git_init [label = "git init"]
-    git_add [label = "git add ."]
-    git_commit [label = "git commit -m \"message\""]
-    git_clone [label = "git clone URL"]
+    git_init [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Initialize the local repository</b></td></tr>
+            <tr><td>git init</td></tr>
+            </table>
+        >
+    ]
+    git_add [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Put the new files into staging area</b></td></tr>
+            <tr><td>git add .</td></tr>
+            </table>
+        >
+    ]
+    git_commit [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create the commit</b></td></tr>
+            <tr><td>git commit -m "message"</td></tr>
+            </table>
+        >
+    ]
+    git_clone [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Clone from a remote repository</b></td></tr>
+            <tr><td>git clone {URL}</td></tr>
+            </table>
+        >
+    ]
 
     // relations
+    track_files -> local_repository
     local_repository -> git_init[label = " yes"]
-    local_repository -> git_clone[label = "no", constraint = false]
-    git_init -> add_or_change
-    add_or_change -> git_add
+    local_repository:e -> git_clone[label = "no", constraint = false]
+    {rank = same; local_repository; git_clone; }
+    git_init -> git_add
     git_add -> git_commit
-    git_clone -> add_or_change:e[constraint = false]
+
 }
