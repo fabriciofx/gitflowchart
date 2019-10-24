@@ -15,6 +15,16 @@ digraph sharingworkflow {
         fontsize = 12
     ]
 
+    // workflow
+    share_commit [
+        shape = invhouse,
+        label = <<b>Share commit(s) workflow</b>>
+    ]
+    fix_conflicts [
+        shape = invhouse,
+        label = <<b>Fix conflict(s) workflow</b>>
+    ]
+
     // decisions
     are_there_conflicts [
         shape = diamond,
@@ -25,10 +35,6 @@ digraph sharingworkflow {
             </table>
         >
     ]
-
-    // actions
-    share_commit [label = <<b>Share commit(s) workflow</b>>]
-    fix_conflicts [label = <<b>Fix conflict(s) workflow</b>>]
 
     // commands
     git_pull [

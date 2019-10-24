@@ -9,8 +9,24 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 390)">
 <title>commonworkflow</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-390 479.5,-390 479.5,4 -4,4"/>
+<!-- common -->
+<g id="node1" class="node"><title>common</title>
+<polygon fill="lightyellow" stroke="black" points="247.946,-362.438 354.5,-350 461.054,-362.438 460.955,-382.562 248.045,-382.562 247.946,-362.438"/>
+<text text-anchor="start" x="292.5" y="-365.9" font-family="Verdana" font-weight="bold" font-size="12.00">Common workflow</text>
+</g>
+<!-- git_add -->
+<g id="node3" class="node"><title>git_add</title>
+<polygon fill="lightyellow" stroke="black" points="475.5,-313 233.5,-313 233.5,-271 475.5,-271 475.5,-313"/>
+<text text-anchor="start" x="243.5" y="-298.4" font-family="Verdana" font-weight="bold" font-size="12.00">Put the changes into staging area</text>
+<text text-anchor="start" x="328" y="-280.4" font-family="Verdana" font-size="12.00">git add .</text>
+</g>
+<!-- common&#45;&gt;git_add -->
+<g id="edge1" class="edge"><title>common&#45;&gt;git_add</title>
+<path fill="none" stroke="black" d="M354.5,-349.989C354.5,-349.989 354.5,-321.117 354.5,-321.117"/>
+<polygon fill="black" stroke="black" points="357.3,-321.117 354.5,-313.117 351.7,-321.117 357.3,-321.117"/>
+</g>
 <!-- fine_to_commit -->
-<g id="node1" class="node"><title>fine_to_commit</title>
+<g id="node2" class="node"><title>fine_to_commit</title>
 <polygon fill="lightyellow" stroke="black" points="354.5,-155 283.5,-123 354.5,-91 425.5,-123 354.5,-155"/>
 <text text-anchor="start" x="332" y="-126.4" font-family="Verdana" font-weight="bold" font-size="12.00">Fine to</text>
 <text text-anchor="start" x="327" y="-114.4" font-family="Verdana" font-weight="bold" font-size="12.00">commit?</text>
@@ -38,24 +54,6 @@
 <path fill="none" stroke="black" d="M354.5,-90.7266C354.5,-90.7266 354.5,-50.1345 354.5,-50.1345"/>
 <polygon fill="black" stroke="black" points="357.3,-50.1344 354.5,-42.1345 351.7,-50.1345 357.3,-50.1344"/>
 <text text-anchor="middle" x="365.5" y="-63.4" font-family="Verdana" font-size="12.00">yes</text>
-</g>
-<!-- add_or_change -->
-<g id="node2" class="node"><title>add_or_change</title>
-<polygon fill="lightyellow" stroke="black" points="471.5,-386 237.5,-386 237.5,-350 471.5,-350 471.5,-386"/>
-<text text-anchor="start" x="245.5" y="-365.9" font-family="Verdana" font-size="12.00"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text>
-<text text-anchor="start" x="300.5" y="-365.9" font-family="Verdana" font-weight="bold" font-size="12.00">Add or change files</text>
-<text text-anchor="start" x="426.5" y="-365.9" font-family="Verdana" font-size="12.00"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;</text>
-</g>
-<!-- git_add -->
-<g id="node3" class="node"><title>git_add</title>
-<polygon fill="lightyellow" stroke="black" points="475.5,-313 233.5,-313 233.5,-271 475.5,-271 475.5,-313"/>
-<text text-anchor="start" x="243.5" y="-298.4" font-family="Verdana" font-weight="bold" font-size="12.00">Put the changes into staging area</text>
-<text text-anchor="start" x="328" y="-280.4" font-family="Verdana" font-size="12.00">git add .</text>
-</g>
-<!-- add_or_change&#45;&gt;git_add -->
-<g id="edge1" class="edge"><title>add_or_change&#45;&gt;git_add</title>
-<path fill="none" stroke="black" d="M354.5,-349.989C354.5,-349.989 354.5,-321.117 354.5,-321.117"/>
-<polygon fill="black" stroke="black" points="357.3,-321.117 354.5,-313.117 351.7,-321.117 357.3,-321.117"/>
 </g>
 <!-- git_status -->
 <g id="node4" class="node"><title>git_status</title>

@@ -15,18 +15,17 @@ digraph commonworkflow {
         fontsize = 12
     ]
 
+    // workflow
+    common[
+        shape = invhouse,
+        label = <<b>Common workflow</b>>
+    ]
+
     // decisions
     fine_to_commit [
         shape = diamond,
         label = <<b>Fine to<br/>commit?</b>>
     ];
-
-    // actions
-    add_or_change[
-        label = <
-            <b>Add or change files</b>
-        >
-    ]
 
     // commands
     git_add [
@@ -63,7 +62,7 @@ digraph commonworkflow {
     ]
 
     // relations
-    add_or_change -> git_add
+    common -> git_add
     git_add -> git_status
     git_status -> fine_to_commit
     fine_to_commit -> git_commit [label = "yes"]

@@ -15,12 +15,10 @@ digraph initworkflow {
         fontsize = 12
     ]
 
-    track_files [
-        label = <
-            <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Track the project files</b></td></tr>
-            </table>
-        >
+    // workflow
+    init [
+        shape = invhouse,
+        label = <<b>Git start</b>>
     ]
 
     // decisions
@@ -69,7 +67,7 @@ digraph initworkflow {
     ]
 
     // relations
-    track_files -> local_repository
+    init -> local_repository
     local_repository -> git_init [label = " yes"]
     local_repository:e -> git_clone [label = "no", constraint = false]
     git_init -> git_add
