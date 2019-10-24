@@ -18,7 +18,7 @@ digraph initworkflow {
     // workflow
     init [
         shape = invhouse,
-        label = <<b>Git start</b>>
+        label = <<b>Git Initialization workflow</b>>
     ]
 
     // decisions
