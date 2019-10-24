@@ -67,7 +67,7 @@ digraph commonworkflow {
     git_add -> git_status
     git_status -> fine_to_commit
     fine_to_commit -> git_commit [label = "yes"]
-    fine_to_commit:w -> git_restore [label = "no", constraint = false]
+    fine_to_commit:w -> git_restore [xlabel = "no", constraint = false]
     git_restore -> git_status
 
     // put git_restore and git_status in the same row
