@@ -1,4 +1,6 @@
 digraph commonworkflow {
+    splines = ortho;
+
     edge [
         arrowsize = 0.8,
         fontname = "Verdana",
