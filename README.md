@@ -8,3 +8,6 @@ and dynamics.
 
 ## Common workflow
 ![](image/common-workflow.svg)
+
+## Sharing commits workflow
+![](image/sharing-workflow.svg)

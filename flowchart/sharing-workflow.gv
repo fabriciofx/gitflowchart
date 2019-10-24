@@ -1,0 +1,61 @@
+digraph sharingworkflow {
+    splines = line;
+
+    edge [
+        arrowsize = 0.8,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    node [
+        shape = rect,
+        style = filled,
+        fillcolor = lightyellow,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    // decisions
+    are_there_conflicts [
+        shape = diamond,
+        label = <
+            <table border="0" cellborder="0" cellspacing="1">
+            <tr><td><b>Are there</b></td></tr>
+            <tr><td><b>conflicts?</b></td></tr>
+            </table>
+        >
+    ]
+
+    // actions
+    share_commit [label = <<b>Share commit(s) workflow</b>>]
+    fix_conflicts [label = <<b>Fix conflict(s) workflow</b>>]
+
+    // commands
+    git_pull [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Receive changes from remote repository</b></td></tr>
+            <tr><td><b>to check possible conflicts</b></td></tr>
+            <tr><td>git pull {origin} {master}</td></tr>
+            </table>
+        >
+    ]
+    git_push [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Send commit to a</b></td></tr>
+            <tr><td><b>remote repository</b></td></tr>
+            <tr><td>git push {origin} {master}</td></tr>
+            </table>
+        >
+    ]
+
+    // relations
+    share_commit -> git_pull
+    git_pull -> are_there_conflicts
+    are_there_conflicts -> git_push [label = "no"]
+    are_there_conflicts:e -> fix_conflicts [label = "yes", constraint = false]
+
+    // put are_there_conflicts and fix_conflicts in the same row
+    { rank = same; are_there_conflicts; fix_conflicts; }
+}
