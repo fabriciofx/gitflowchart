@@ -23,9 +23,9 @@
 </g>
 <!-- fine_to_commit&#45;&gt;git_restore -->
 <g id="edge5" class="edge"><title>fine_to_commit:w&#45;&gt;git_restore</title>
-<path fill="none" stroke="black" d="M282.5,-123C222.647,-123 164.838,-167.867 132.938,-197.793"/>
-<polygon fill="black" stroke="black" points="130.754,-196.007 126.91,-203.561 134.626,-200.053 130.754,-196.007"/>
-<text text-anchor="middle" x="169.5" y="-176.4" font-family="Verdana" font-size="12.00">no</text>
+<path fill="none" stroke="black" d="M283.5,-123C283.5,-123 107.5,-123 107.5,-123 107.5,-123 107.5,-195.866 107.5,-195.866"/>
+<polygon fill="black" stroke="black" points="104.7,-195.865 107.5,-203.866 110.3,-195.866 104.7,-195.865"/>
+<text text-anchor="middle" x="213.5" y="-176.4" font-family="Verdana" font-size="12.00">no</text>
 </g>
 <!-- git_commit -->
 <g id="node6" class="node"><title>git_commit</title>
@@ -35,8 +35,8 @@
 </g>
 <!-- fine_to_commit&#45;&gt;git_commit -->
 <g id="edge4" class="edge"><title>fine_to_commit&#45;&gt;git_commit</title>
-<path fill="none" stroke="black" d="M354.5,-90.9075C354.5,-77.9571 354.5,-63.0221 354.5,-50.374"/>
-<polygon fill="black" stroke="black" points="357.3,-50.0355 354.5,-42.0355 351.7,-50.0355 357.3,-50.0355"/>
+<path fill="none" stroke="black" d="M354.5,-90.7266C354.5,-90.7266 354.5,-50.1345 354.5,-50.1345"/>
+<polygon fill="black" stroke="black" points="357.3,-50.1344 354.5,-42.1345 351.7,-50.1345 357.3,-50.1344"/>
 <text text-anchor="middle" x="365.5" y="-63.4" font-family="Verdana" font-size="12.00">yes</text>
 </g>
 <!-- add_or_change -->
@@ -54,8 +54,8 @@
 </g>
 <!-- add_or_change&#45;&gt;git_add -->
 <g id="edge1" class="edge"><title>add_or_change&#45;&gt;git_add</title>
-<path fill="none" stroke="black" d="M354.5,-361.837C354.5,-353.383 354.5,-342.968 354.5,-333.372"/>
-<polygon fill="black" stroke="black" points="357.3,-333.221 354.5,-325.221 351.7,-333.221 357.3,-333.221"/>
+<path fill="none" stroke="black" d="M354.5,-361.989C354.5,-361.989 354.5,-333.117 354.5,-333.117"/>
+<polygon fill="black" stroke="black" points="357.3,-333.117 354.5,-325.117 351.7,-333.117 357.3,-333.117"/>
 </g>
 <!-- git_status -->
 <g id="node4" class="node"><title>git_status</title>
@@ -65,18 +65,18 @@
 </g>
 <!-- git_add&#45;&gt;git_status -->
 <g id="edge2" class="edge"><title>git_add&#45;&gt;git_status</title>
-<path fill="none" stroke="black" d="M354.5,-282.769C354.5,-274.016 354.5,-263.622 354.5,-254.135"/>
-<polygon fill="black" stroke="black" points="357.3,-254.096 354.5,-246.096 351.7,-254.096 357.3,-254.096"/>
+<path fill="none" stroke="black" d="M354.5,-282.829C354.5,-282.829 354.5,-254.229 354.5,-254.229"/>
+<polygon fill="black" stroke="black" points="357.3,-254.229 354.5,-246.229 351.7,-254.229 357.3,-254.229"/>
 </g>
 <!-- git_status&#45;&gt;fine_to_commit -->
 <g id="edge3" class="edge"><title>git_status&#45;&gt;fine_to_commit</title>
-<path fill="none" stroke="black" d="M354.5,-203.764C354.5,-192.232 354.5,-177.379 354.5,-163.622"/>
-<polygon fill="black" stroke="black" points="357.3,-163.238 354.5,-155.238 351.7,-163.238 357.3,-163.238"/>
+<path fill="none" stroke="black" d="M354.5,-203.866C354.5,-203.866 354.5,-163.361 354.5,-163.361"/>
+<polygon fill="black" stroke="black" points="357.3,-163.361 354.5,-155.361 351.7,-163.361 357.3,-163.361"/>
 </g>
 <!-- git_restore&#45;&gt;git_status -->
 <g id="edge6" class="edge"><title>git_restore&#45;&gt;git_status</title>
-<path fill="none" stroke="black" d="M215.08,-225C224.207,-225 233.333,-225 242.459,-225"/>
-<polygon fill="black" stroke="black" points="242.48,-227.8 250.48,-225 242.48,-222.2 242.48,-227.8"/>
+<path fill="none" stroke="black" d="M215.119,-225C215.119,-225 242.371,-225 242.371,-225"/>
+<polygon fill="black" stroke="black" points="242.371,-227.8 250.371,-225 242.371,-222.2 242.371,-227.8"/>
 </g>
 </g>
 </svg>
