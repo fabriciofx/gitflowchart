@@ -28,7 +28,7 @@ digraph initworkflow {
         shape = diamond,
         label = <
             <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>is there a local</b></td></tr>
+            <tr><td><b>Is there a local</b></td></tr>
             <tr><td><b>repository?</b></td></tr>
             </table>
         >
@@ -70,10 +70,11 @@ digraph initworkflow {
 
     // relations
     track_files -> local_repository
-    local_repository -> git_init[label = " yes"]
-    local_repository:e -> git_clone[label = "no", constraint = false]
-    {rank = same; local_repository; git_clone; }
+    local_repository -> git_init [label = " yes"]
+    local_repository:e -> git_clone [label = "no", constraint = false]
     git_init -> git_add
     git_add -> git_commit
 
+    // put local_repository and git_clone in the same row
+    {rank = same; local_repository; git_clone; }
 }
