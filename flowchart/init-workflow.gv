@@ -24,12 +24,8 @@ digraph initworkflow {
     // decisions
     local_repository [
         shape = diamond,
-        label = <
-            <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Is there a local</b></td></tr>
-            <tr><td><b>repository?</b></td></tr>
-            </table>
-        >
+        label = <<b>Is there a local<br/>repository?</b>>,
+        height = 1.2
     ]
 
     // commands

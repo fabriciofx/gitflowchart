@@ -28,12 +28,8 @@ digraph sharingworkflow {
     // decisions
     are_there_conflicts [
         shape = diamond,
-        label = <
-            <table border="0" cellborder="0" cellspacing="1">
-            <tr><td><b>Are there</b></td></tr>
-            <tr><td><b>conflicts?</b></td></tr>
-            </table>
-        >
+        label = <<b>Are there<br/>conflicts?</b>>,
+        height = 1
     ]
 
     // commands

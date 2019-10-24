@@ -24,7 +24,8 @@ digraph commonworkflow {
     // decisions
     fine_to_commit [
         shape = diamond,
-        label = <<b>Fine to<br/>commit?</b>>
+        label = <<b>Fine to<br/>commit?</b>>,
+        height = 1
     ];
 
     // commands
