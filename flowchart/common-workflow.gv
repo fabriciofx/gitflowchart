@@ -22,6 +22,11 @@ digraph commonworkflow {
     ]
 
     // decisions
+    check_commit [
+        shape = diamond,
+        label = <<b>Check what will<br/>be commited?</b>>,
+        height = 1
+    ];
     fine_to_commit [
         shape = diamond,
         label = <<b>Fine to<br/>commit?</b>>,
@@ -64,7 +69,9 @@ digraph commonworkflow {
 
     // relations
     common -> git_add
-    git_add -> git_status
+    git_add -> check_commit
+    check_commit -> git_status [label = "yes"]
+    check_commit:e -> git_commit [label = "no", constraint = false]
     git_status -> fine_to_commit
     fine_to_commit -> git_commit [label = "yes"]
     fine_to_commit:w -> git_restore [xlabel = "no", constraint = false]
