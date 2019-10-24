@@ -1,5 +1,5 @@
 digraph initworkflow {
-    splines = line;
+    splines = ortho;
 
     edge [
         arrowsize = 0.8,
@@ -20,6 +20,10 @@ digraph initworkflow {
         shape = invhouse,
         label = <<b>Git Initialization workflow</b>>
     ]
+    common[
+        shape = invhouse,
+        label = <<b>Common workflow</b>>
+    ]
 
     // decisions
     working_dir [
@@ -37,22 +41,6 @@ digraph initworkflow {
             </table>
         >
     ]
-    git_add [
-        label = <
-            <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Put the new files into staging area</b></td></tr>
-            <tr><td>git add .</td></tr>
-            </table>
-        >
-    ]
-    git_commit [
-        label = <
-            <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Create the commit</b></td></tr>
-            <tr><td>git commit -m "message"</td></tr>
-            </table>
-        >
-    ]
     git_clone [
         label = <
             <table border="0" cellborder="0" cellspacing="0">
@@ -65,9 +53,9 @@ digraph initworkflow {
     // relations
     init -> working_dir
     working_dir -> git_init [label = " yes"]
-    working_dir:e -> git_clone [label = "no", constraint = false]
-    git_init -> git_add
-    git_add -> git_commit
+    working_dir -> git_clone [xlabel = "no"]
+    git_init -> common
+    git_clone -> common:e [constraint = false]
 
     // put working_dir and git_clone in the same row
     {rank = same; working_dir; git_clone; }
