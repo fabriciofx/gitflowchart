@@ -22,9 +22,9 @@ digraph initworkflow {
     ]
 
     // decisions
-    local_repository [
+    working_dir [
         shape = diamond,
-        label = <<b>Is there a local<br/>repository?</b>>,
+        label = <<b>Has a working<br/>directory?</b>>,
         height = 1.2
     ]
 
@@ -63,12 +63,12 @@ digraph initworkflow {
     ]
 
     // relations
-    init -> local_repository
-    local_repository -> git_init [label = " yes"]
-    local_repository:e -> git_clone [label = "no", constraint = false]
+    init -> working_dir
+    working_dir -> git_init [label = " yes"]
+    working_dir:e -> git_clone [label = "no", constraint = false]
     git_init -> git_add
     git_add -> git_commit
 
-    // put local_repository and git_clone in the same row
-    {rank = same; local_repository; git_clone; }
+    // put working_dir and git_clone in the same row
+    {rank = same; working_dir; git_clone; }
 }
