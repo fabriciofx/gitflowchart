@@ -18,11 +18,11 @@ digraph initworkflow {
     // workflow
     init [
         shape = invhouse,
-        label = <<b>Git Initialization workflow</b>>
+        label = <<b>Initialization<br/>workflow</b>>
     ]
     common[
         shape = invhouse,
-        label = <<b>Common workflow</b>>
+        label = <<b>Common<br/>workflow</b>>
     ]
 
     // decisions

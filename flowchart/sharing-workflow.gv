@@ -18,11 +18,11 @@ digraph sharingworkflow {
     // workflow
     share_commit [
         shape = invhouse,
-        label = <<b>Share commit(s) workflow</b>>
+        label = <<b>Share commit<br/>workflow</b>>
     ]
     fix_conflicts [
         shape = invhouse,
-        label = <<b>Fix conflict(s) workflow</b>>
+        label = <<b>Fix conflict<br/>workflow</b>>
     ]
 
     // decisions

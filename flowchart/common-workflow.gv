@@ -18,7 +18,7 @@ digraph commonworkflow {
     // workflow
     common[
         shape = invhouse,
-        label = <<b>Common workflow</b>>
+        label = <<b>Common<br/>workflow</b>>
     ]
 
     // decisions
