@@ -67,14 +67,16 @@ digraph contributingworkflow {
 
     // relations
     contributing -> open_issue
-    open_issue:w -> already_forked:n
-    already_forked:e -> git_checkout_branch:n [label = "yes", constraint = false]
-    already_forked:s -> fork_project:n [xlabel = "no"]
-    open_issue:e -> git_checkout_branch:e [label = "ID"]
+    open_issue:s -> already_forked:n
+    already_forked -> git_checkout_branch [label = "yes"]
+    already_forked -> fork_project [xlabel = "no"]
+    open_issue:w -> git_checkout_branch:w [xlabel = "ID "]
     git_checkout_branch -> common
     common -> git_push
     git_push -> pull_request
+    fork_project:s -> git_clone:n
+    git_clone:s -> git_checkout_branch:e
 
-    fork_project -> git_clone
-    git_clone -> git_checkout_branch:w
+    // put already_forked  and fork_project in the same row
+    {rank = same; already_forked; fork_project; }
 }
