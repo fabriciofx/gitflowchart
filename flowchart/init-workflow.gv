@@ -16,11 +16,11 @@ digraph initworkflow {
     ]
 
     // workflow
-    init [
+    init_workflow [
         shape = invhouse,
         label = <<b>Initialization<br/>workflow</b>>
     ]
-    common[
+    common_workflow [
         shape = invhouse,
         label = <<b>Common<br/>workflow</b>>
     ]
@@ -33,7 +33,7 @@ digraph initworkflow {
     ]
 
     // commands
-    git_init [
+    git_init_workflow [
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Initialize the local repository</b></td></tr>
@@ -51,11 +51,11 @@ digraph initworkflow {
     ]
 
     // relations
-    init -> working_dir
-    working_dir -> git_init [label = " yes"]
+    init_workflow -> working_dir
+    working_dir -> git_init_workflow [label = " yes"]
     working_dir -> git_clone [xlabel = "no"]
-    git_init -> common
-    git_clone -> common:e [constraint = false]
+    git_init_workflow -> common_workflow
+    git_clone -> common_workflow:e [constraint = false]
 
     // put working_dir and git_clone in the same row
     {rank = same; working_dir; git_clone; }

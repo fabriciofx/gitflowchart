@@ -16,11 +16,11 @@ digraph sharingworkflow {
     ]
 
     // workflow
-    share_commit [
+    sharing_workflow [
         shape = invhouse,
-        label = <<b>Share commit<br/>workflow</b>>
+        label = <<b>Sharing<br/>workflow</b>>
     ]
-    fix_conflicts [
+    fix_conflicts_workflow [
         shape = invhouse,
         label = <<b>Fix conflict<br/>workflow</b>>
     ]
@@ -53,11 +53,11 @@ digraph sharingworkflow {
     ]
 
     // relations
-    share_commit -> git_pull
+    sharing_workflow -> git_pull
     git_pull -> are_there_conflicts
     are_there_conflicts -> git_push [label = "no"]
-    are_there_conflicts:e -> fix_conflicts [label = "yes", constraint = false]
+    are_there_conflicts:e -> fix_conflicts_workflow [label = "yes", constraint = false]
 
-    // put are_there_conflicts and fix_conflicts in the same row
-    { rank = same; are_there_conflicts; fix_conflicts; }
+    // put are_there_conflicts and fix_conflicts_workflow in the same row
+    { rank = same; are_there_conflicts; fix_conflicts_workflow; }
 }

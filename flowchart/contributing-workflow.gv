@@ -16,11 +16,11 @@ digraph contributingworkflow {
     ]
 
     // workflow
-    contributing [
+    contributing_workflow [
         shape = invhouse,
         label = <<b>Contributing<br/>workflow</b>>
     ]
-    common [
+    common_workflow [
         shape = invhouse,
         label = <<b>Common<br/>workflow</b>>
     ]
@@ -66,13 +66,13 @@ digraph contributingworkflow {
     ]
 
     // relations
-    contributing -> open_issue
+    contributing_workflow -> open_issue
     open_issue:s -> already_forked:n
     already_forked -> git_checkout_branch [label = "yes"]
     already_forked -> fork_project [xlabel = "no"]
     open_issue:w -> git_checkout_branch:w [xlabel = "ID "]
-    git_checkout_branch -> common
-    common -> git_push
+    git_checkout_branch -> common_workflow
+    common_workflow -> git_push
     git_push -> pull_request
     fork_project:s -> git_clone:n
     git_clone:s -> git_checkout_branch:e

@@ -16,7 +16,7 @@ digraph commonworkflow {
     ]
 
     // workflow
-    common[
+    common_workflow [
         shape = invhouse,
         label = <<b>Common<br/>workflow</b>>
     ]
@@ -68,7 +68,7 @@ digraph commonworkflow {
     ]
 
     // relations
-    common -> git_add
+    common_workflow -> git_add
     git_add -> check_commit
     check_commit -> git_status [label = "yes"]
     check_commit:e -> git_commit [label = "no", constraint = false]
