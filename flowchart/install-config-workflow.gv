@@ -1,0 +1,113 @@
+digraph installconfigworkflow {
+    splines = ortho;
+
+    edge [
+        arrowsize = 0.8,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    node [
+        shape = rect,
+        style = filled,
+        fillcolor = lightyellow,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    // workflow
+    install_config_workflow [
+        shape = invhouse,
+        label = <<b>Install and<br/>config workflow</b>>,
+        group = g1
+    ]
+    init_workflow [
+        shape = invhouse,
+        label = <<b>Initialization<br/>workflow</b>>,
+        group = g1
+    ]
+
+    // decisions
+    already_installed [
+        shape = diamond,
+        label = <<b>Already<br/>installed<br/>Git?</b>>,
+        height = 1,
+        group = g1
+    ];
+    which_os [
+        shape = diamond,
+        label = <<b>Which OS<br/>are you<br/>running?</b>>,
+        height = 1
+    ];
+    connection_uses_proxy [
+        shape = diamond,
+        label = <<b>Your<br/>connection<br/>uses proxy?</b>>,
+        height = 1,
+        group = g1
+    ];
+
+    // actions
+    install_git_for_linux [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Install Git for Linux</b></td></tr>
+            <tr><td>apt-get install git-all</td></tr>
+            </table>
+        >
+    ]
+    install_git_for_windows [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Install Git for Windows</b></td></tr>
+            <tr><td>https://gitforwindows.org</td></tr>
+            </table>
+        >
+    ]
+
+    // commands
+    git_config_name [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Configure your name</b></td></tr>
+            <tr><td>git config --global user.name "Your Name"</td></tr>
+            </table>
+        >,
+        group = g1
+    ]
+    git_config_email [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Configure your e-mail</b></td></tr>
+            <tr><td>git config --global user.email "your@email.com"</td></tr>
+            </table>
+        >,
+        group = g1
+    ]
+    git_config_proxy [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Configure your proxy</b></td></tr>
+            <tr><td>git config ‐‐global http.proxy<br/>https://username:password@proxyserver.com:port</td></tr>
+            </table>
+        >
+    ]
+
+    // relations
+    install_config_workflow -> already_installed
+    already_installed -> git_config_name [label = "yes"]
+    already_installed -> which_os [xlabel = "no"]
+    which_os -> install_git_for_windows [label = "Windows"]
+    which_os -> install_git_for_linux [label = "Linux"]
+    install_git_for_windows -> git_config_name
+    install_git_for_linux -> git_config_name:e
+    git_config_name -> git_config_email
+    git_config_email -> connection_uses_proxy
+    connection_uses_proxy -> init_workflow [label = "no"]
+    connection_uses_proxy -> git_config_proxy [label = "yes"]
+    git_config_proxy -> init_workflow
+
+    // put already_installed, which_os and install_git_for_windows in the same row
+    {rank = same; already_installed; which_os; install_git_for_windows;}
+    // put connection_uses_proxy and git_config_proxy in the same row
+    {rank = same; connection_uses_proxy; git_config_proxy;}
+}
