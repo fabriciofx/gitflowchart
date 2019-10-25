@@ -1,0 +1,80 @@
+digraph contributingworkflow {
+    //splines = ortho;
+
+    edge [
+        arrowsize = 0.8,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    node [
+        shape = rect,
+        style = filled,
+        fillcolor = lightyellow,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    // workflow
+    contributing [
+        shape = invhouse,
+        label = <<b>Contributing<br/>workflow</b>>
+    ]
+    common [
+        shape = invhouse,
+        label = <<b>Common<br/>workflow</b>>
+    ]
+
+    // actions
+    open_issue [label = <<b>Open an issue</b>>]
+    fork_project [label = <<b>Fork the project</b>>]
+    pull_request [label = <<b>Open a Pull Request (PR)</b>>]
+
+    // decisions
+    already_forked [
+        shape = diamond,
+        label = <<b>Already<br/>forked?</b>>,
+        height = 1
+    ];
+
+    // commands
+    git_clone [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Clone from your fork</b></td></tr>
+            <tr><td>git clone {URL}</td></tr>
+            </table>
+        >
+    ]
+    git_checkout_branch [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create a new branch</b></td></tr>
+            <tr><td><b>using opened issue ID</b></td></tr>
+            <tr><td>git checkout -b {ID}</td></tr>
+            </table>
+        >
+    ]
+    git_push [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Send branch to your</b></td></tr>
+            <tr><td><b>forked repository</b></td></tr>
+            <tr><td>git push origin {ID}</td></tr>
+            </table>
+        >
+    ]
+
+    // relations
+    contributing -> open_issue
+    open_issue:w -> already_forked:n
+    already_forked:e -> git_checkout_branch:n [label = "yes", constraint = false]
+    already_forked:s -> fork_project:n [xlabel = "no"]
+    open_issue:e -> git_checkout_branch:e [label = "ID"]
+    git_checkout_branch -> common
+    common -> git_push
+    git_push -> pull_request
+
+    fork_project -> git_clone
+    git_clone -> git_checkout_branch:w
+}

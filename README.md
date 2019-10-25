@@ -11,3 +11,6 @@ and dynamics.
 
 ## Sharing commits workflow
 ![](image/sharing-workflow.svg)
+
+## Contributing workflow
+![](image/contributing-workflow.svg)
