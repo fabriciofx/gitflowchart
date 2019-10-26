@@ -27,7 +27,7 @@ digraph contributingworkflow {
 
     // actions
     open_issue [label = <<b>Open an issue</b>>]
-    fork_project [label = <<b>Fork the project</b>>]
+    fork_project [label = <<b>Fork the project</b>>, group = g1]
     pull_request [label = <<b>Open a Pull Request (PR)</b>>]
 
     // decisions
@@ -35,7 +35,7 @@ digraph contributingworkflow {
         shape = diamond,
         label = <<b>Already<br/>forked?</b>>,
         height = 1
-    ];
+    ]
 
     // commands
     git_clone [
@@ -44,7 +44,8 @@ digraph contributingworkflow {
             <tr><td><b>Clone from your fork</b></td></tr>
             <tr><td>git clone {URL}</td></tr>
             </table>
-        >
+        >,
+        group = g1
     ]
     git_checkout_branch [
         label = <
