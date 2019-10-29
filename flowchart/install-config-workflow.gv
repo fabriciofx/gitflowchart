@@ -37,7 +37,8 @@ digraph installconfigworkflow {
     which_os [
         shape = diamond,
         label = <<b>Which OS<br/>are you<br/>running?</b>>,
-        height = 1
+        height = 1,
+        group = g2
     ];
     connection_uses_proxy [
         shape = diamond,
@@ -53,7 +54,8 @@ digraph installconfigworkflow {
             <tr><td><b>Install Git for Linux</b></td></tr>
             <tr><td>apt-get install git-all</td></tr>
             </table>
-        >
+        >,
+        group = g2
     ]
     install_git_for_windows [
         label = <
@@ -99,7 +101,7 @@ digraph installconfigworkflow {
     which_os -> install_git_for_windows [label = "Windows"]
     which_os -> install_git_for_linux [label = "Linux"]
     install_git_for_windows -> git_config_name
-    install_git_for_linux -> git_config_name:e
+    install_git_for_linux -> git_config_name
     git_config_name -> git_config_email
     git_config_email -> connection_uses_proxy
     connection_uses_proxy -> init_workflow [label = "no"]
