@@ -55,8 +55,11 @@ digraph sharingworkflow {
     // relations
     sharing_workflow -> git_pull
     git_pull -> are_there_conflicts
-    are_there_conflicts -> git_push [label = "no"]
-    are_there_conflicts:e -> fix_conflicts_workflow [label = "yes", constraint = false]
+    are_there_conflicts -> git_push [label = <<b>   no</b>>]
+    are_there_conflicts:e -> fix_conflicts_workflow [
+        label = <<b>yes  </b>>,
+        constraint = false
+    ]
 
     // put are_there_conflicts and fix_conflicts_workflow in the same row
     { rank = same; are_there_conflicts; fix_conflicts_workflow; }

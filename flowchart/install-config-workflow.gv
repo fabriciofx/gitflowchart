@@ -96,16 +96,40 @@ digraph installconfigworkflow {
 
     // relations
     install_config_workflow -> already_installed
-    already_installed -> git_config_name [label = "yes"]
-    already_installed -> which_os [xlabel = "no"]
-    which_os -> install_git_for_windows [label = "Windows"]
-    which_os -> install_git_for_linux [label = "Linux"]
+    already_installed -> git_config_name [
+        label = <<b>   yes</b>>
+    ]
+    already_installed -> which_os [
+        xlabel = <
+            <table border="0" cellborder="0" cellpadding="7">
+            <tr><td><b>no</b></td></tr>
+            </table>
+        >
+    ]
+    which_os -> install_git_for_windows [
+        label = <
+            <table border="0" cellborder="0" cellpadding="7">
+            <tr><td><b>Windows</b></td></tr>
+            </table>
+        >
+    ]
+    which_os -> install_git_for_linux [
+        label = <<b>   Linux</b>>
+    ]
     install_git_for_windows -> git_config_name
     install_git_for_linux -> git_config_name
     git_config_name -> git_config_email
     git_config_email -> connection_uses_proxy
-    connection_uses_proxy -> init_workflow [label = "no"]
-    connection_uses_proxy -> git_config_proxy [label = "yes"]
+    connection_uses_proxy -> init_workflow [
+        label = <<b>   no</b>>
+    ]
+    connection_uses_proxy -> git_config_proxy [
+        xlabel = <
+            <table border="0" cellborder="0" cellpadding="7">
+            <tr><td><b>yes   </b></td></tr>
+            </table>
+        >
+    ]
     git_config_proxy -> init_workflow
 
     // put already_installed, which_os and install_git_for_windows in the same row

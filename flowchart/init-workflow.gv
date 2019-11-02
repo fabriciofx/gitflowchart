@@ -52,8 +52,14 @@ digraph initworkflow {
 
     // relations
     init_workflow -> working_dir
-    working_dir -> git_init_workflow [label = " yes"]
-    working_dir -> git_clone [xlabel = "no"]
+    working_dir -> git_init_workflow [label = <<b>   yes</b>>]
+    working_dir -> git_clone [
+        xlabel = <
+            <table border="0" cellborder="0" cellpadding="7">
+            <tr><td><b>no    </b></td></tr>
+            </table>
+        >
+    ]
     git_init_workflow -> common_workflow
     git_clone -> common_workflow:e [constraint = false]
 
