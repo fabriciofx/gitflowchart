@@ -1,5 +1,5 @@
 digraph contributingworkflow {
-    //splines = ortho;
+    splines = ortho;
 
     edge [
         arrowsize = 0.8,
@@ -15,26 +15,44 @@ digraph contributingworkflow {
         fontsize = 12
     ]
 
+    // dot
+    dot1 [
+        shape = point,
+        style = invis,
+        width = 0
+    ]
+
     // workflow
     contributing_workflow [
         shape = invhouse,
-        label = <<b>Contributing<br/>workflow</b>>
+        label = <<b>Contributing<br/>workflow</b>>,
+        group = g1
     ]
     common_workflow [
         shape = invhouse,
-        label = <<b>Common<br/>workflow</b>>
+        label = <<b>Common<br/>workflow</b>>,
+        group = g1
     ]
 
     // actions
-    open_issue [label = <<b>Open an issue</b>>]
-    fork_project [label = <<b>Fork the project</b>>, group = g1]
-    pull_request [label = <<b>Open a Pull Request (PR)</b>>]
+    open_issue [
+        label = <<b>Open an issue</b>>,
+        group = g1
+    ]
+    fork_project [
+        label = <<b>Fork the project</b>>
+    ]
+    pull_request [
+        label = <<b>Open a Pull Request (PR)</b>>,
+        group = g1
+    ]
 
     // decisions
     already_forked [
         shape = diamond,
         label = <<b>Already<br/>forked?</b>>,
-        height = 1
+        height = 1,
+        group = g1
     ]
 
     // commands
@@ -44,17 +62,17 @@ digraph contributingworkflow {
             <tr><td><b>Clone from your fork</b></td></tr>
             <tr><td>git clone {URL}</td></tr>
             </table>
-        >,
-        group = g1
+        >
     ]
-    git_checkout_branch [
+    git_checkout [
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Create a new branch</b></td></tr>
             <tr><td><b>using opened issue ID</b></td></tr>
             <tr><td>git checkout -b {ID}</td></tr>
             </table>
-        >
+        >,
+        group = g1
     ]
     git_push [
         label = <
@@ -63,21 +81,25 @@ digraph contributingworkflow {
             <tr><td><b>forked repository</b></td></tr>
             <tr><td>git push origin {ID}</td></tr>
             </table>
-        >
+        >,
+        group = g1
     ]
 
     // relations
     contributing_workflow -> open_issue
-    open_issue:s -> already_forked:n
-    already_forked -> git_checkout_branch [label = <<b>   yes</b>>]
-    already_forked -> fork_project [xlabel = <<b>  no  </b>>]
-    open_issue:w -> git_checkout_branch:w [xlabel = <<b>ID</b>>]
-    git_checkout_branch -> common_workflow
+    open_issue -> already_forked
+    already_forked -> git_checkout [label = <<b>   yes</b>>]
+    already_forked -> fork_project [xlabel = <<b>no</b>>, minlen = 3]
+    open_issue -> dot1 [ label = <<b>ID</b>>, dir = none]
+    dot1 -> git_checkout
+    git_checkout -> common_workflow
     common_workflow -> git_push
     git_push -> pull_request
-    fork_project:s -> git_clone:n
-    git_clone:s -> git_checkout_branch:e
+    fork_project -> git_clone
+    git_clone -> git_checkout [ constraint = false ]
 
     // put already_forked  and fork_project in the same row
     {rank = same; already_forked; fork_project; }
+    {rank = same; git_checkout; git_clone; }
+    {rank = same; dot1; git_checkout; }
 }
