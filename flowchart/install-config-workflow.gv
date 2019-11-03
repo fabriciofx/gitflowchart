@@ -15,6 +15,14 @@ digraph installconfigworkflow {
         fontsize = 12
     ]
 
+    // dot
+    dot [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = g2
+    ]
+
     // workflow
     install_config_workflow [
         shape = invhouse,
@@ -117,7 +125,8 @@ digraph installconfigworkflow {
         label = <<b>   Linux</b>>
     ]
     install_git_for_windows -> git_config_name
-    install_git_for_linux -> git_config_name
+    install_git_for_linux -> dot [dir = none]
+    dot -> git_config_name
     git_config_name -> git_config_email
     git_config_email -> connection_uses_proxy
     connection_uses_proxy -> init_workflow [
@@ -128,7 +137,8 @@ digraph installconfigworkflow {
             <table border="0" cellborder="0" cellpadding="7">
             <tr><td><b>yes   </b></td></tr>
             </table>
-        >
+        >,
+        minlen = 2
     ]
     git_config_proxy -> init_workflow
 
