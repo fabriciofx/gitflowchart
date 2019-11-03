@@ -74,16 +74,6 @@ digraph contributingworkflow {
         >,
         group = g1
     ]
-    git_push [
-        label = <
-            <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Send branch to your</b></td></tr>
-            <tr><td><b>forked repository</b></td></tr>
-            <tr><td>git push origin {ID}</td></tr>
-            </table>
-        >,
-        group = g1
-    ]
 
     // relations
     contributing_workflow -> open_issue
@@ -93,8 +83,7 @@ digraph contributingworkflow {
     open_issue -> dot1 [ label = <<b>ID</b>>, dir = none]
     dot1 -> git_checkout
     git_checkout -> common_workflow
-    common_workflow -> git_push
-    git_push -> pull_request
+    common_workflow -> pull_request
     fork_project -> git_clone
     git_clone -> git_checkout [ constraint = false ]
 
