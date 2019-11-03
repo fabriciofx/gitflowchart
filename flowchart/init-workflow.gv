@@ -25,6 +25,16 @@ digraph initworkflow {
         label = <<b>Common<br/>workflow</b>>
     ]
 
+    // actions
+    gitignore [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create a .gitignore file</b></td></tr>
+            <tr><td>https://www.gitignore.io/</td></tr>
+            </table>
+        >
+    ]
+
     // decisions
     working_dir [
         shape = diamond,
@@ -33,7 +43,7 @@ digraph initworkflow {
     ]
 
     // commands
-    git_init_workflow [
+    git_init [
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Initialize the local repository</b></td></tr>
@@ -52,7 +62,7 @@ digraph initworkflow {
 
     // relations
     init_workflow -> working_dir
-    working_dir -> git_init_workflow [label = <<b>   yes</b>>]
+    working_dir -> git_init [label = <<b>   yes</b>>]
     working_dir -> git_clone [
         xlabel = <
             <table border="0" cellborder="0" cellpadding="7">
@@ -60,8 +70,9 @@ digraph initworkflow {
             </table>
         >
     ]
-    git_init_workflow -> common_workflow
-    git_clone -> common_workflow:e [constraint = false]
+    git_clone -> common_workflow [constraint = false]
+    git_init -> gitignore
+    gitignore -> common_workflow
 
     // put working_dir and git_clone in the same row
     {rank = same; working_dir; git_clone; }
