@@ -1,0 +1,84 @@
+digraph mergeorrebaseworkflow {
+    // splines = ortho;
+
+    edge [
+        arrowsize = 0.8,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    node [
+        shape = rect,
+        style = filled,
+        fillcolor = lightyellow,
+        fontname = "Verdana",
+        fontsize = 12
+    ]
+
+    // workflow
+    merge_or_rebase_workflow [
+        shape = invhouse,
+        label = <<b>Merge or rebase<br/>workflow</b>>,
+        group = g1
+    ]
+
+    // decisions
+    joining_branches_decision [
+        shape = diamond,
+        label = <<b>Joining<br/>branches?</b>>,
+        height = 1,
+        group = g1
+    ]
+    editing_commits_decision [
+        shape = diamond,
+        label = <<b>Editing<br/>commits?</b>>,
+        height = 1,
+        group = g1
+    ]
+    dont_make_me_think_decision [
+        shape = diamond,
+        label = <<b>Don't make<br/>me think?</b>>,
+        height = 1,
+        group = g1
+    ]
+    shared_branch_decision [
+        shape = diamond,
+        label = <<b>Shared<br/>branch<br/>(master)?</b>>,
+        height = 1,
+        group = g2
+    ]
+
+    // commands
+    git_rebase [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Rebase</b></td></tr>
+            <tr><td>git rebase {branch}</td></tr>
+            </table>
+        >,
+        group = g2
+    ]
+    git_merge [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Merge</b></td></tr>
+            <tr><td>git merge {branch}</td></tr>
+            </table>
+        >,
+        group = g2
+    ]
+
+    // relations
+    merge_or_rebase_workflow -> dont_make_me_think_decision
+    dont_make_me_think_decision -> git_merge [label = <<b>yes</b>>]
+    dont_make_me_think_decision -> joining_branches_decision [label = <<b>   no</b>>]
+    joining_branches_decision -> editing_commits_decision [label = <<b>   no</b>>]
+    joining_branches_decision -> shared_branch_decision [label = <<b>yes</b>>]
+    editing_commits_decision -> git_rebase [label = <<b>yes</b>>]
+    shared_branch_decision -> git_merge [label = <<b>   yes</b>>]
+    shared_branch_decision -> git_rebase [label = <<b>   no</b>>]
+
+    { rank = same; dont_make_me_think_decision; git_merge}
+    { rank = same; joining_branches_decision; shared_branch_decision}
+    { rank = same; editing_commits_decision; git_rebase}
+}

@@ -17,3 +17,6 @@ and dynamics.
 
 ## Contributing workflow
 ![](image/contributing-workflow.svg)
+
+## Merge or rebase workflow
+![](image/merge-or-rebase-workflow.svg)
