@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-for file in flowchart/*.gv; do
+wdir=$(dirname $(git rev-parse --absolute-git-dir))
+
+for file in $wdir/flowchart/*.gv; do
     filename="${file##*/}"
-    echo -n "Rendering file $file... "
-    dot -Tsvg $file -o image/"${filename%.*}.svg"
+    echo -n "Rendering file $filename... "
+    dot -Tsvg $file -o $wdir/image/"${filename%.*}.svg"
     echo "done."
 done
