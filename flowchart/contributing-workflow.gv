@@ -64,12 +64,12 @@ digraph contributingworkflow {
             </table>
         >
     ]
-    git_checkout [
+    git_switch [
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Create a new branch</b></td></tr>
             <tr><td><b>using opened issue ID</b></td></tr>
-            <tr><td>git checkout -b {ID}</td></tr>
+            <tr><td>git switch -c {ID}</td></tr>
             </table>
         >,
         group = g1
@@ -78,17 +78,17 @@ digraph contributingworkflow {
     // relations
     contributing_workflow -> open_issue
     open_issue -> already_forked
-    already_forked -> git_checkout [label = <<b>   yes</b>>]
+    already_forked -> git_switch [label = <<b>   yes</b>>]
     already_forked -> fork_project [xlabel = <<b>no</b>>, minlen = 3]
     open_issue -> dot1 [ label = <<b>ID</b>>, dir = none]
-    dot1 -> git_checkout
-    git_checkout -> common_workflow
+    dot1 -> git_switch
+    git_switch -> common_workflow
     common_workflow -> pull_request
     fork_project -> git_clone
-    git_clone -> git_checkout [ constraint = false ]
+    git_clone -> git_switch [ constraint = false ]
 
     // put already_forked  and fork_project in the same row
     {rank = same; already_forked; fork_project; }
-    {rank = same; git_checkout; git_clone; }
-    {rank = same; dot1; git_checkout; }
+    {rank = same; git_switch; git_clone; }
+    {rank = same; dot1; git_switch; }
 }
