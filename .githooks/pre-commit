@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+wdir="$(dirname $(git rev-parse --absolute-git-dir))"
+
+$wdir/build
+git add $wdir

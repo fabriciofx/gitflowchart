@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+wdir="$(dirname $(git rev-parse --absolute-git-dir))"
+
+for file in $wdir/.githooks/*; do
+    [[ $file == *".githooks/install"* ]] && continue
+    filename="${file##*/}"
+    echo -n "Installing '$filename' hook... "
+    cp -a $file $wdir/.git/hooks
+    echo "done."
+done
