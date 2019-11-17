@@ -1,5 +1,5 @@
 digraph sharingworkflow {
-    splines = line;
+    splines = ortho;
 
     edge [
         arrowsize = 0.8,
@@ -15,32 +15,51 @@ digraph sharingworkflow {
         fontsize = 12
     ]
 
-    // dot
-    dot [
-        shape = point,
-        style = invis,
-        width = 0
-    ]
-
-    // dot [group = g2]
-
+    ////////////////////////////////////////////////////////////////////////////
+    // MAIN
+    ////////////////////////////////////////////////////////////////////////////
     // workflow
     sharing_workflow [
         shape = invhouse,
         label = <<b>Sharing<br/>workflow</b>>,
-        group = g1
+        group = main
     ]
-    fix_conflicts_workflow [
+    common_workflow [
         shape = invhouse,
-        label = <<b>Fix conflict<br/>workflow</b>>
+        label = <<b>Common<br/>workflow</b>>,
+        group = main
     ]
 
     // decisions
+    already_have_an_account [
+        shape = diamond,
+        label = <<b>Already<br/>have an<br/>account?</b>>,
+        height = 1,
+        group = main
+    ]
+    already_created_a_remote_repository [
+        shape = diamond,
+        label = <<b>Already<br/>created a<br/>remote<br/>repository?</b>>,
+        height = 1,
+        group = main
+    ]
+    already_added_remote [
+        shape = diamond,
+        label = <<b>Already<br/>added a<br/>remote?</b>>,
+        height = 1,
+        group = main
+    ]
+    already_sent_anything [
+        shape = diamond,
+        label = <<b>Already<br/>sent<br/>anything?</b>>,
+        height = 1,
+        group = main
+    ]
     are_there_conflicts [
         shape = diamond,
         label = <<b>Are there<br/>conflicts?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
 
     // commands
@@ -49,34 +68,146 @@ digraph sharingworkflow {
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Receive changes from remote repository</b></td></tr>
             <tr><td><b>to check possible conflicts</b></td></tr>
-            <tr><td>git pull {origin} {master}</td></tr>
+            <tr><td>git pull &lt;remote-name&gt; &lt;branch&gt;</td></tr>
             </table>
         >,
-        group = g1
+        group = main
     ]
     git_push [
         label = <
             <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Send the commit to a</b></td></tr>
+            <tr><td><b>Send the commits to a</b></td></tr>
             <tr><td><b>remote repository</b></td></tr>
-            <tr><td>git push {origin} {master}</td></tr>
+            <tr><td>git push &lt;remote-name&gt; &lt;branch&gt;</td></tr>
             </table>
         >,
-        group = g1
+        group = main
     ]
+
+    // put them on the same horizontal line
+    { rank = same; dot4; already_added_remote; }
+    { rank = same; dot5; git_push; }
 
     // relations
-    sharing_workflow -> git_pull
+    sharing_workflow -> already_have_an_account
+    already_have_an_account -> already_created_a_remote_repository [label = <<b>   yes</b>>]
+    already_created_a_remote_repository -> already_added_remote [label = <<b>   yes</b>>]
+    already_added_remote -> already_sent_anything [label = <<b>   yes</b>>]
+    already_sent_anything -> git_pull [label = <<b>   yes</b>>]
     git_pull -> are_there_conflicts
     are_there_conflicts -> git_push [xlabel = <<b>no   </b>>]
-    are_there_conflicts -> fix_conflicts_workflow [
-        label = <<b>yes</b>>,
-        minlen = 2
-    ]
-    fix_conflicts_workflow -> dot [ dir = none]
-    dot -> git_push [ constraint = false]
+    git_push -> common_workflow
 
-    // put are_there_conflicts and fix_conflicts_workflow in the same row
-    { rank = same; are_there_conflicts; fix_conflicts_workflow; }
-    { rank = same; git_push; dot; }
+    git_push -> dot5 [dir = back, minlen = 3]
+    dot5 -> already_sent_anything [dir = none, label = <<b>          no</b>>]
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    // LEFT
+    ////////////////////////////////////////////////////////////////////////////
+    // workflow
+    fix_conflicts_workflow [
+        shape = invhouse,
+        label = <<b>Fix conflict<br/>workflow</b>>,
+        group = left
+    ]
+
+    // actions
+    create_an_account [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create an account at</b></td></tr>
+            <tr><td><b>GitHub/Gitlab/BitBucket</b></td></tr>
+            </table>
+        >,
+        group = left
+    ]
+
+    // commands
+    git_remote [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Add remote repository location</b></td></tr>
+            <tr><td>git remote add &lt;remote-name&gt; &lt;URL&gt;</td></tr>
+            </table>
+        >,
+        group = left
+    ]
+
+    // dots
+    dot1 [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = left
+    ]
+    dot2 [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = left
+    ]
+    dot3 [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = left
+    ]
+
+    // put them on the same horizontal line
+    { rank = same; create_an_account; already_have_an_account; }
+    { rank = same; dot1; already_created_a_remote_repository; }
+    { rank = same; git_remote; already_added_remote; }
+    { rank = same; dot2; already_sent_anything; }
+    { rank = same; fix_conflicts_workflow; are_there_conflicts; }
+    { rank = same; dot3; git_push; }
+
+    // relations
+    create_an_account -> already_have_an_account [dir = back, label = <<b>no</b>>, minlen = 2]
+    create_an_account -> dot1 [dir = none]
+    dot1 -> already_created_a_remote_repository
+    git_remote -> already_added_remote [dir = back, label = <<b>no</b>>, minlen = 2]
+    git_remote -> dot2 [dir = none]
+    dot2 -> already_sent_anything
+    fix_conflicts_workflow -> are_there_conflicts [dir = back, label = <<b>yes</b>>, minlen = 2]
+    fix_conflicts_workflow -> dot3 [dir = none]
+    dot3 -> git_push
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    // RIGHT
+    ////////////////////////////////////////////////////////////////////////////
+    // actions
+    create_a_remote_repository [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create a remote</b></td></tr>
+            <tr><td><b>repository</b></td></tr>
+            </table>
+        >,
+        group = right
+    ]
+
+    // dots
+    dot4 [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = right
+    ]
+    dot5 [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = right
+    ]
+
+    // put them on the same horizontal line
+    { rank = same; already_created_a_remote_repository; create_a_remote_repository; }
+    { rank = same; fix_conflicts_workflow; are_there_conflicts; }
+
+    // relations
+    already_created_a_remote_repository -> create_a_remote_repository [label = <<b>no</b>>, minlen = 2]
+    create_a_remote_repository -> dot4 [dir = none]
+    dot4 -> already_added_remote -> dot4
 }
