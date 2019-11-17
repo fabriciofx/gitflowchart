@@ -208,6 +208,6 @@ digraph sharingworkflow {
 
     // relations
     already_created_a_remote_repository -> create_a_remote_repository [label = <<b>no</b>>, minlen = 2]
-    create_a_remote_repository -> dot4 [dir = none]
-    dot4 -> already_added_remote -> dot4
+    dot4 -> create_a_remote_repository [dir = none]
+    already_added_remote -> dot4 [dir = back]
 }
