@@ -21,7 +21,13 @@ digraph commonworkflow {
         shape = point,
         style = invis,
         width = 0,
-        group = left
+        group = right
+    ]
+    dot2 [
+        shape = point,
+        style = invis,
+        width = 0,
+        group = right
     ]
 
     // workflow
@@ -109,15 +115,19 @@ digraph commonworkflow {
     git_commit -> would_you_like_share_the_changes
     would_you_like_share_the_changes -> sharing_workflow [label = <<b>   yes</b>>]
 
+    check_what_will_be_commited -> dot1 [dir = none, label = <<b>no</b>>, minlen = 2]
+    dot1 -> git_commit
+
     // left
     git_restore -> git_status [minlen = 2]
     fine_to_commit -> git_restore [xlabel = <<b>no</b>>]
 
     // right
-    would_you_like_share_the_changes -> dot1 [dir = none, label = <<b>no</b>>, minlen = 2]
-    create_new_files_or_edit_existent_files -> dot1 [dir = back]
+    would_you_like_share_the_changes -> dot2 [dir = none, label = <<b>no</b>>, minlen = 5]
+    create_new_files_or_edit_existent_files -> dot2 [dir = back]
 
     // put them on the same horizontal line
-    { rank = same; would_you_like_share_the_changes; dot1; }
+    { rank = same; check_what_will_be_commited; dot1 }
+    { rank = same; would_you_like_share_the_changes; dot2; }
     { rank = same; git_restore; git_status; }
 }
