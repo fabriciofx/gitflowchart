@@ -20,50 +20,46 @@ digraph commonworkflow {
     dot1 [
         shape = point,
         style = invis,
-        width = 0
-    ]
-    dot2 [
-        shape = point,
-        style = invis,
-        width = 0
+        width = 0,
+        group = left
     ]
 
     // workflow
     common_workflow [
         shape = invhouse,
         label = <<b>Common<br/>workflow</b>>,
-        group = g1
+        group = main
     ]
     sharing_workflow [
         shape = invhouse,
         label = <<b>Sharing<br/>workflow</b>>,
-        group = g1
+        group = main
     ]
 
     // actions
     create_new_files_or_edit_existent_files [
         label = <<b>Create new or edit<br/>existent files</b>>,
-        group = g1
+        group = main
     ]
 
     // decisions
-    check_commit [
+    check_what_will_be_commited [
         shape = diamond,
         label = <<b>Check what<br/>will be<br/>commited?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
     fine_to_commit [
         shape = diamond,
         label = <<b>Fine to<br/>commit?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
-    share_changes [
+    would_you_like_share_the_changes [
         shape = diamond,
         label = <<b>Would you<br/>like share<br/>the changes?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
 
     // commands
@@ -74,7 +70,7 @@ digraph commonworkflow {
             <tr><td>git add .</td></tr>
             </table>
         >,
-        group = g1
+        group = main
     ]
     git_status [
         label = <
@@ -83,7 +79,16 @@ digraph commonworkflow {
             <tr><td>git status</td></tr>
             </table>
         >,
-        group = g1
+        group = main
+    ]
+    git_commit [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Create the commit</b></td></tr>
+            <tr><td>git commit -m "message"</td></tr>
+            </table>
+        >,
+        group = main
     ]
     git_restore [
         label = <
@@ -93,34 +98,26 @@ digraph commonworkflow {
             </table>
         >
     ]
-    git_commit [
-        label = <
-            <table border="0" cellborder="0" cellspacing="0">
-            <tr><td><b>Create the commit</b></td></tr>
-            <tr><td>git commit -m "message"</td></tr>
-            </table>
-        >,
-        group = g1
-    ]
 
     // relations
     common_workflow -> create_new_files_or_edit_existent_files
     create_new_files_or_edit_existent_files -> git_add
-    create_new_files_or_edit_existent_files -> dot2 [dir = back ]
-    git_add -> check_commit
-    check_commit -> git_status [label = <<b>   yes</b>>]
-    check_commit -> git_commit [xlabel = <<b>no   </b>>, constraint = false]
+    git_add -> check_what_will_be_commited
+    check_what_will_be_commited -> git_status [label = <<b>   yes</b>>]
     git_status -> fine_to_commit
     fine_to_commit -> git_commit [label = <<b>   yes</b>>]
-    fine_to_commit -> git_restore [xlabel = <<b>no</b>>, constraint = false]
-    git_restore -> git_status
-    git_commit -> share_changes
-    share_changes -> sharing_workflow [label = <<b>   yes</b>>]
-    share_changes -> dot1 [dir = "none"]
-    dot2 -> dot1 [xlabel = <<b>   no</b>>, dir = "none"]
+    git_commit -> would_you_like_share_the_changes
+    would_you_like_share_the_changes -> sharing_workflow [label = <<b>   yes</b>>]
 
-    // put git_restore and git_status in the same row
-    { rank = same; create_new_files_or_edit_existent_files; dot2; }
+    // left
+    git_restore -> git_status [minlen = 2]
+    fine_to_commit -> git_restore [xlabel = <<b>no</b>>]
+
+    // right
+    would_you_like_share_the_changes -> dot1 [dir = none, label = <<b>no</b>>, minlen = 2]
+    create_new_files_or_edit_existent_files -> dot1 [dir = back]
+
+    // put them on the same horizontal line
+    { rank = same; would_you_like_share_the_changes; dot1; }
     { rank = same; git_restore; git_status; }
-    { rank = same; share_changes; dot1; }
 }
