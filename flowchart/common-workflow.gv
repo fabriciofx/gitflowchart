@@ -123,7 +123,7 @@ digraph commonworkflow {
     fine_to_commit -> git_restore [xlabel = <<b>no</b>>]
 
     // right
-    would_you_like_share_the_changes -> dot2 [dir = none, label = <<b>no</b>>, minlen = 5]
+    would_you_like_share_the_changes -> dot2 [dir = none, label = <<b>no</b>>, minlen = 3]
     create_new_files_or_edit_existent_files -> dot2 [dir = back]
 
     // put them on the same horizontal line
