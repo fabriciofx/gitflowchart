@@ -55,7 +55,7 @@ digraph initworkflow {
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Clone from a remote repository</b></td></tr>
-            <tr><td>git clone {URL}</td></tr>
+            <tr><td>git clone &lt;URL&gt;</td></tr>
             </table>
         >
     ]

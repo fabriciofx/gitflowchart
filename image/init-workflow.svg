@@ -59,7 +59,7 @@
 <g id="node6" class="node"><title>git_clone</title>
 <polygon fill="lightyellow" stroke="black" points="450,-326.938 222,-326.938 222,-284.938 450,-284.938 450,-326.938"/>
 <text text-anchor="start" x="232" y="-312.338" font-family="Verdana" font-weight="bold" font-size="12.00">Clone from a remote repository</text>
-<text text-anchor="start" x="287.5" y="-294.338" font-family="Verdana" font-size="12.00">git clone {URL}</text>
+<text text-anchor="start" x="285" y="-294.338" font-family="Verdana" font-size="12.00">git clone &lt;URL&gt;</text>
 </g>
 <!-- working_dir&#45;&gt;git_clone -->
 <g id="edge3" class="edge"><title>working_dir&#45;&gt;git_clone</title>
