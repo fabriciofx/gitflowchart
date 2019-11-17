@@ -3,4 +3,5 @@
 wdir="$(dirname $(git rev-parse --absolute-git-dir))"
 
 $wdir/build
-git add $wdir
+git --git-dir=$wdir/.git --work-tree=$wdir add $wdir/flowchart/*.gv $wdir/image/*.svg
+
