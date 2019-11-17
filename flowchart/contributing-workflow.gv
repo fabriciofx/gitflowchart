@@ -60,7 +60,7 @@ digraph contributingworkflow {
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Clone from your fork</b></td></tr>
-            <tr><td>git clone {URL}</td></tr>
+            <tr><td>git clone &lt;URL&gt;</td></tr>
             </table>
         >
     ]
@@ -69,7 +69,7 @@ digraph contributingworkflow {
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Create a new branch</b></td></tr>
             <tr><td><b>using opened issue ID</b></td></tr>
-            <tr><td>git switch -c {ID}</td></tr>
+            <tr><td>git switch -c &lt;ID&gt;</td></tr>
             </table>
         >,
         group = g1

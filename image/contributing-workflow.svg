@@ -15,7 +15,7 @@
 <polygon fill="lightyellow" stroke="black" points="200.5,-224.938 35.5,-224.938 35.5,-165.938 200.5,-165.938 200.5,-224.938"/>
 <text text-anchor="start" x="49" y="-209.838" font-family="Verdana" font-weight="bold" font-size="12.00">Create a new branch</text>
 <text text-anchor="start" x="46" y="-192.838" font-family="Verdana" font-weight="bold" font-size="12.00">using opened issue ID</text>
-<text text-anchor="start" x="63.5" y="-174.838" font-family="Verdana" font-size="12.00">git switch &#45;c {ID}</text>
+<text text-anchor="start" x="61" y="-174.838" font-family="Verdana" font-size="12.00">git switch &#45;c &lt;ID&gt;</text>
 </g>
 <!-- dot1&#45;&gt;git_switch -->
 <g id="edge6" class="edge"><title>dot1&#45;&gt;git_switch</title>
@@ -79,7 +79,7 @@
 <g id="node8" class="node"><title>git_clone</title>
 <polygon fill="lightyellow" stroke="black" points="418.5,-216.438 261.5,-216.438 261.5,-174.438 418.5,-174.438 418.5,-216.438"/>
 <text text-anchor="start" x="272" y="-201.838" font-family="Verdana" font-weight="bold" font-size="12.00">Clone from your fork</text>
-<text text-anchor="start" x="292" y="-183.838" font-family="Verdana" font-size="12.00">git clone {URL}</text>
+<text text-anchor="start" x="289.5" y="-183.838" font-family="Verdana" font-size="12.00">git clone &lt;URL&gt;</text>
 </g>
 <!-- fork_project&#45;&gt;git_clone -->
 <g id="edge9" class="edge"><title>fork_project&#45;&gt;git_clone</title>

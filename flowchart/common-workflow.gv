@@ -100,7 +100,7 @@ digraph commonworkflow {
         label = <
             <table border="0" cellborder="0" cellspacing="0">
             <tr><td><b>Restore from staging area</b></td></tr>
-            <tr><td>git restore --staged {filename}</td></tr>
+            <tr><td>git restore --staged &lt;filename&gt;</td></tr>
             </table>
         >
     ]
