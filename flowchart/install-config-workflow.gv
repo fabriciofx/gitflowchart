@@ -16,44 +16,55 @@ digraph installconfigworkflow {
     ]
 
     // dot
-    dot [
+    dot1 [
         shape = point,
         style = invis,
-        width = 0,
-        group = g2
+        width = 0
     ]
 
     // workflow
     install_config_workflow [
         shape = invhouse,
         label = <<b>Install and<br/>config workflow</b>>,
-        group = g1
+        group = main
     ]
     init_workflow [
         shape = invhouse,
         label = <<b>Initialization<br/>workflow</b>>,
-        group = g1
+        group = main
     ]
 
     // decisions
-    already_installed [
+    already_installed_windows [
         shape = diamond,
         label = <<b>Already<br/>installed<br/>Git?</b>>,
         height = 1,
-        group = g1
-    ];
-    which_os [
+        group = main
+    ]
+    already_installed_linux [
+        shape = diamond,
+        label = <<b>Already<br/>installed<br/>Git?</b>>,
+        height = 1,
+        group = left
+    ]
+    already_installed_macos [
+        shape = diamond,
+        label = <<b>Already<br/>installed<br/>Git?</b>>,
+        height = 1,
+        group = right
+    ]
+    which_os_are_you_running [
         shape = diamond,
         label = <<b>Which OS<br/>are you<br/>running?</b>>,
         height = 1,
-        group = g2
-    ];
+        group = main
+    ]
     connection_uses_proxy [
         shape = diamond,
         label = <<b>Your<br/>connection<br/>uses proxy?</b>>,
         height = 1,
-        group = g1
-    ];
+        group = main
+    ]
 
     // actions
     install_git_for_linux [
@@ -63,7 +74,7 @@ digraph installconfigworkflow {
             <tr><td>apt-get install git-all</td></tr>
             </table>
         >,
-        group = g2
+        group = left
     ]
     install_git_for_windows [
         label = <
@@ -71,7 +82,17 @@ digraph installconfigworkflow {
             <tr><td><b>Install Git for Windows</b></td></tr>
             <tr><td>https://gitforwindows.org</td></tr>
             </table>
-        >
+        >,
+        group = main
+    ]
+    install_git_for_macos [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Install Git for macOS</b></td></tr>
+            <tr><td>brew install git</td></tr>
+            </table>
+        >,
+        group = right
     ]
 
     // commands
@@ -82,7 +103,7 @@ digraph installconfigworkflow {
             <tr><td>git config --global user.name "Your Name"</td></tr>
             </table>
         >,
-        group = g1
+        group = main
     ]
     git_config_email [
         label = <
@@ -91,7 +112,7 @@ digraph installconfigworkflow {
             <tr><td>git config --global user.email "your@email.com"</td></tr>
             </table>
         >,
-        group = g1
+        group = main
     ]
     git_config_proxy [
         label = <
@@ -99,51 +120,68 @@ digraph installconfigworkflow {
             <tr><td><b>Configure your proxy</b></td></tr>
             <tr><td>git config ‐‐global http.proxy<br/>https://username:password@proxyserver.com:port</td></tr>
             </table>
-        >
+        >,
+        group = right
+    ]
+    git_config_autocrlf_windows [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Configure autocrlf</b></td></tr>
+            <tr><td>git config --global core.autocrlf true</td></tr>
+            </table>
+        >,
+        group = main
+    ]
+    git_config_autocrlf_linux [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Configure autocrlf</b></td></tr>
+            <tr><td>git config --global core.autocrlf input</td></tr>
+            </table>
+        >,
+        group = left
+    ]
+    git_config_autocrlf_macos [
+        label = <
+            <table border="0" cellborder="0" cellspacing="0">
+            <tr><td><b>Configure autocrlf</b></td></tr>
+            <tr><td>git config --global core.autocrlf input</td></tr>
+            </table>
+        >,
+        group = right
     ]
 
     // relations
-    install_config_workflow -> already_installed
-    already_installed -> git_config_name [
-        label = <<b>   yes</b>>
-    ]
-    already_installed -> which_os [
-        xlabel = <
-            <table border="0" cellborder="0" cellpadding="7">
-            <tr><td><b>no</b></td></tr>
-            </table>
-        >
-    ]
-    which_os -> install_git_for_windows [
-        label = <
-            <table border="0" cellborder="0" cellpadding="7">
-            <tr><td><b>Windows</b></td></tr>
-            </table>
-        >
-    ]
-    which_os -> install_git_for_linux [
-        label = <<b>   Linux</b>>
-    ]
-    install_git_for_windows -> git_config_name
-    install_git_for_linux -> dot [dir = none]
-    dot -> git_config_name
+    install_config_workflow -> which_os_are_you_running
+    which_os_are_you_running -> already_installed_windows [label = <<b>   Windows</b>>]
+    already_installed_windows -> install_git_for_windows [label = <<b>  no</b>>]
+    install_git_for_windows -> git_config_autocrlf_windows
+    git_config_autocrlf_windows -> git_config_name
     git_config_name -> git_config_email
     git_config_email -> connection_uses_proxy
-    connection_uses_proxy -> init_workflow [
-        label = <<b>   no</b>>
-    ]
-    connection_uses_proxy -> git_config_proxy [
-        xlabel = <
-            <table border="0" cellborder="0" cellpadding="7">
-            <tr><td><b>yes   </b></td></tr>
-            </table>
-        >,
-        minlen = 2
-    ]
+    connection_uses_proxy -> init_workflow [label = <<b>   no</b>>]
+    connection_uses_proxy -> git_config_proxy [label = <<b>yes</b>>, minlen = 2]
     git_config_proxy -> init_workflow
 
-    // put already_installed, which_os and install_git_for_windows in the same row
-    {rank = same; already_installed; which_os; install_git_for_windows;}
-    // put connection_uses_proxy and git_config_proxy in the same row
-    {rank = same; connection_uses_proxy; git_config_proxy;}
+    already_installed_windows -> dot1 [dir = none, label = <<b>yes</b>>, minlen = 2]
+    dot1 -> git_config_autocrlf_windows
+
+    already_installed_linux -> which_os_are_you_running [dir = back, xlabel = <<b>Linux</b>>, minlen = 5]
+    already_installed_linux -> install_git_for_linux [label = <<b>   no</b>>]
+    install_git_for_linux -> git_config_autocrlf_linux
+    already_installed_linux -> git_config_autocrlf_linux [xlabel = <<b>yes   </b>>, constraint = false]
+
+    which_os_are_you_running -> already_installed_macos [xlabel = <<b>macOS</b>>, minlen = 5]
+    already_installed_macos -> install_git_for_macos [label = <<b>   no</b>>]
+    install_git_for_macos -> git_config_autocrlf_macos
+    already_installed_macos -> git_config_autocrlf_macos [xlabel = <<b>yes   </b>>,constraint = false]
+
+    git_config_autocrlf_linux -> git_config_name
+    git_config_name -> git_config_autocrlf_macos [dir = back]
+
+    // put them on the same horizontal line
+    { rank = same; already_installed_linux; which_os_are_you_running; already_installed_macos; }
+    { rank = same; already_installed_windows; dot1; }
+    { rank = same; git_config_autocrlf_linux; git_config_name; git_config_autocrlf_macos; }
+    { rank = same; connection_uses_proxy; git_config_proxy; }
 }
