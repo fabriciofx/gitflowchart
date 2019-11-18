@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 wdir="$(dirname $(git rev-parse --absolute-git-dir))"
+files="$(git --git-dir=$wdir/.git --work-tree=$wdir status --short | grep '\.gv' | sed 's/[ MARCDU?!]\{3\}//g')"
 
-for file in $wdir/flowchart/*.gv; do
+for file in $files; do
     filename="${file##*/}"
     echo -n "Rendering file '$filename'... "
     dot -q1 -Tsvg $file -o $wdir/image/"${filename%.*}.svg"
