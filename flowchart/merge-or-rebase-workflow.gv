@@ -19,7 +19,7 @@ digraph mergeorrebaseworkflow {
     merge_or_rebase_workflow [
         shape = invhouse,
         label = <<b>Merge or rebase<br/>workflow</b>>,
-        group = g1
+        group = main
     ]
 
     // decisions
@@ -27,25 +27,25 @@ digraph mergeorrebaseworkflow {
         shape = diamond,
         label = <<b>Joining<br/>branches?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
     editing_commits_decision [
         shape = diamond,
         label = <<b>Editing<br/>commits?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
     dont_make_me_think_decision [
         shape = diamond,
         label = <<b>Don't make<br/>me think?</b>>,
         height = 1,
-        group = g1
+        group = main
     ]
     shared_branch_decision [
         shape = diamond,
         label = <<b>Shared<br/>branch<br/>(master)?</b>>,
         height = 1,
-        group = g2
+        group = right
     ]
 
     // commands
@@ -56,7 +56,7 @@ digraph mergeorrebaseworkflow {
             <tr><td>git rebase &lt;branch&gt;</td></tr>
             </table>
         >,
-        group = g2
+        group = right
     ]
     git_merge [
         label = <
@@ -65,12 +65,12 @@ digraph mergeorrebaseworkflow {
             <tr><td>git merge &lt;branch&gt;</td></tr>
             </table>
         >,
-        group = g2
+        group = right
     ]
 
     // relations
     merge_or_rebase_workflow -> dont_make_me_think_decision
-    dont_make_me_think_decision -> git_merge [label = <<b>yes</b>>]
+    dont_make_me_think_decision -> git_merge [label = <<b>yes</b>>, minlen = 2]
     dont_make_me_think_decision -> joining_branches_decision [label = <<b>   no</b>>]
     joining_branches_decision -> editing_commits_decision [label = <<b>   no</b>>]
     joining_branches_decision -> shared_branch_decision [label = <<b>yes</b>>]
